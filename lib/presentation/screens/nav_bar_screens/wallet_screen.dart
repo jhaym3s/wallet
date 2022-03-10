@@ -36,7 +36,7 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
           children: [
             const TopBalance(),
             Container(
-              height: 45,
+              height: 50,
               decoration: BoxDecoration(
                 color: kWhite,
                 borderRadius: BorderRadius.circular(
@@ -45,14 +45,16 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
               ),
               child: TabBar(
                 controller: _tabController,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    10.0,
-                  ),
-                  color: Colors.grey.shade900,
-                ),
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.grey.shade900,
+                // indicator: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(
+                //     10.0,
+                //   ),
+                //   color: Colors.grey.shade900,
+                // ),
+                labelColor: kBlack,
+                indicatorColor: kBlack,
+                labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+                unselectedLabelColor: Colors.grey[500],
                 tabs: const [
                   Tab(
                     text: 'Tokens',
@@ -70,7 +72,7 @@ class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderSt
                  TokenList(),
                   Center(
                     child: Text(
-                      'Page Two',
+                      'NFT PAGE',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,

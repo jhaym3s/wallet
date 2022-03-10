@@ -15,29 +15,29 @@ class TopBalance extends StatelessWidget {
     return Container(
       width: kScreenWidth(context),
       height: kScreenHeight(context) / 3,
-      color:  Colors.grey.shade300,
+      color: const Color.fromARGB(248, 250, 250, 250),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
         child: Column(
           children: [
             const Gap(30),
-           const Text("Account 1"),
+            Text("Account 1",style: Theme.of(context).textTheme.bodyText2,),
            const Gap(20),
             const Text(
               "\$0.0",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 40),
             ),
             const Gap(10),
-             const CopyButton(text: Text("mnemonics"), value: "0x",radius: 18,),
+             const CopyButton(text: Text("Address"), value: "0x",radius: 18,),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  const[
                 TopIconsAndLabel(images: AssetsImages.sendIcon, label: "Send"),
-                TopIconsAndLabel(images: AssetsImages.recieveIcon, label: "Send"),
-                TopIconsAndLabel(images: AssetsImages.buyIcon, label: "Send"),
-                TopIconsAndLabel(images: AssetsImages.swapIcon, label: "Send")
+                TopIconsAndLabel(images: AssetsImages.recieveIcon, label: "Recieve"),
+                TopIconsAndLabel(images: AssetsImages.buyIcon, label: "Buy"),
+                TopIconsAndLabel(images: AssetsImages.swapIcon, label: "Swap")
               ],
             ),
           ],
