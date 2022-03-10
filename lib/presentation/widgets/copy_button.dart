@@ -6,10 +6,12 @@ class CopyButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.value,
+    required this.radius
   }) : super(key: key);
 
   final Text text;
   final String? value;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CopyButton extends StatelessWidget {
      style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
+                  borderRadius: BorderRadius.circular(radius),
                   side: const BorderSide(
                       color: Colors.teal, 
                       width: 2.0,

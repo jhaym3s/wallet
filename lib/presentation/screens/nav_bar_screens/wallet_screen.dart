@@ -1,59 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hodl/configs/configs.dart';
-import 'package:hodl/presentation/widgets/copy_button.dart';
+import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart';
 
-class WalletScreen extends StatefulWidget {
-  static const routeName = "/wallet_screen";
-  const WalletScreen({Key? key}) : super(key: key);
+import '../../../configs/configs.dart';
 
+class WalletScreen extends StatefulWidget {
+  static const routeName = "/walletscreen";
+
+  const WalletScreen({Key? key}) : super(key: key);
   @override
-  State<WalletScreen> createState() => _WalletScreenState();
+  _WalletScreenState createState() => _WalletScreenState();
 }
 
-class _WalletScreenState extends State<WalletScreen>
-    with SingleTickerProviderStateMixin {
-  
+class _WalletScreenState extends State<WalletScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
   @override
   void initState() {
-    _tabController = TabController(length: tabsLabel.length, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
+    _tabController.dispose();
   }
-  List<Tab> tabsLabel = <Tab>[
-    const Tab(text: 'Token'),
-    const Tab(text: 'NFT'),
-  ];
-  late TabController _tabController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kWhite,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const TopBalance(),
-              TabBar(
-                labelColor: kPrimaryColor,
-                indicatorPadding: const EdgeInsets.only(bottom: 0),
-                unselectedLabelColor: Colors.grey,
-                //indicatorColor: kBlack,
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
-                controller: _tabController,
-                isScrollable: true,
-                tabs: tabsLabel,
+        child: Column(
+          children: [
+            const TopBalance(),
+            Container(
+              height: 45,
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ),
               ),
-              const Divider()
-            ],
-          ),
+              child: TabBar(
+                controller: _tabController,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    10.0,
+                  ),
+                  color: Colors.grey.shade900,
+                ),
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.grey.shade900,
+                tabs: const [
+                  Tab(
+                    text: 'Tokens',
+                  ),
+                  Tab(
+                    text: "NFT",
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: const [
+                 TokenList(),
+                  Center(
+                    child: Text(
+                      'Page Two',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

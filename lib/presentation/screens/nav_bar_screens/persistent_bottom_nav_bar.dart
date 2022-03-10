@@ -9,6 +9,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../configs/configs.dart';
 
 class CustomNavigationBar extends StatefulWidget {
+  static const routeName = "custom_nav_bar";
   const CustomNavigationBar({Key? key}) : super(key: key);
 
   @override
@@ -20,8 +21,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   List<Widget> _children() {
     return [
-      const DiscoverScreen(),
       const WalletScreen(),
+      const DiscoverScreen(),
+      
       const Dapps(),
       const SettingsScreen(),
     ];

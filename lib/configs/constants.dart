@@ -27,9 +27,9 @@ const double kTimelineDateSize = 88.0;
 const double kBorderRadius = 10.0;
 const double kBottomNavBarHeight = 60.0;
 
-// Colors
-const Color kPrimaryColor = Color(0xFF0E34A0);
-const Color kSecondaryColor = Color(0xFF20A7C3);
+// Colors  Color(0xff248FF2)
+const Color kPrimaryColor = Color(0xff248FF2);
+const Color kSecondaryColor = Color(0xFF0E34A0);
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kBlack = Color(0xFF000000);
 const Color kDanger = Color(0xFFE22B23);
@@ -38,8 +38,6 @@ const Color kInfo = Color(0xFF069AD6);
 const Color kWarning = Color(0xFFED9E03);
 const Color kTransparent = Colors.transparent;
 const Color kSuccess = Color(0xFF57CE7E);
-const LinearGradient kSweetchLinearColors = LinearGradient(colors: [Color(0xFF524EB6),Color(0xFF7B61FF),Color(0xFF20A7C3), Color(0xFF20A7C3)]);
-
 // Padding
 const double kPaddingS = 10.0;
 const double kPaddingM = 20.0;
@@ -107,14 +105,10 @@ bool validateStructure(String value){
   }
 const String kPasswordRegex = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
 
-/// Demo account email address.
-const String kDemoEmail = 'admin@example.com';
 
-/// Demo account password.
-const String kDemoPassword = 'Password1';
 
 /// Currency used in the application.
-const String kCurrency = 'NGN';
+const String kCurrency = 'USD';
 
 /// Logz.io Token for remote logging.
 /// Settings > General > Account Settings
@@ -126,11 +120,10 @@ const String kLogzioUrl = 'https://listener-uk.logz.io:8071/';
 
 /// Assets images
 class AssetsImages {
-  static const homeIcon = "assets/images/home_icon.png";
   static const swapIcon = "assets/images/swap_icon.png";
-  static const walletIcon = "assets/images/wallet_icon.png";
-  static const settingsIcon = "assets/images/settings_icon.png";
-  static const logoAndName ="assets/images/logo_and_text.png";
+  static const recieveIcon = "assets/images/recieve.png";
+  static const sendIcon = "assets/images/send.png";
+  static const buyIcon ="assets/images/buy.png";
 }
 
 /// Preference keys used to store/read values using [AppPreferences].

@@ -23,7 +23,7 @@ class CredentialSuccessState extends CredentialState{
     required this.mnemonic,
   });
    @override
-  List<Object?> get props => [mnemonicsList, address, privateKey];
+  List<Object?> get props => [mnemonicsList, address, privateKey,mnemonic];
 }
 
 class GetPrivateKeyState extends CredentialState{
