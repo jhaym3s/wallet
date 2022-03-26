@@ -10,32 +10,30 @@ class CredentialInitial extends CredentialState {}
 
 class CredentialLoadingState extends CredentialState{}
 
-class CredentialSuccessState extends CredentialState{
-  final List<String> mnemonicsList;
-  final String privateKey;
-  final EthereumAddress address;
-  final String mnemonic;
-
-  CredentialSuccessState({
-    required this.mnemonicsList,
-    required this.address,
-    required this.privateKey,
+class GenerateCredentialMnemonicsState extends CredentialState{
+  final String? mnemonic;
+  GenerateCredentialMnemonicsState({
     required this.mnemonic,
   });
    @override
-  List<Object?> get props => [mnemonicsList, address, privateKey,mnemonic];
+  List<Object?> get props => [mnemonic];
 }
 
 class GetPrivateKeyState extends CredentialState{
-  final String privateKey;
+  final String? privateKey;
 
   GetPrivateKeyState({required this.privateKey});
+   @override
+  List<Object?> get props => [privateKey];
 }
 
 class GetWalletAddressState extends CredentialState{
   final EthereumAddress walletAddress;
 
   GetWalletAddressState({required this.walletAddress});
+
+   @override
+  List<Object?> get props => [walletAddress];
 }
 
 class CredentialFailureState extends CredentialState{}

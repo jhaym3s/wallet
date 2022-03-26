@@ -1,4 +1,5 @@
 class EthAddressFormatter {
+  
   EthAddressFormatter(this.address);
   final String address;
   String mask() {

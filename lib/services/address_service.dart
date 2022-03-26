@@ -26,7 +26,8 @@ class AddressService implements IAddressService {
 
   @override
   String entropyToMnemonic(String entropyMnemonic) {
-    return bip39.entropyToMnemonic(entropyMnemonic);
+    final result = bip39.entropyToMnemonic(entropyMnemonic);
+    return result;
   }
 
   @override
@@ -47,13 +48,30 @@ class AddressService implements IAddressService {
     return address;
   }
 
+  String? getPrefMnemonics() {
+    final mnemonics = _configService.getMnemonic();
+    return mnemonics;
+  }
+
+  String? getPrefPrivateKey() {
+    final privateKey = _configService.getPrivateKey();
+    return privateKey;
+  }
+
+  String? getprefEthAddress() {
+    final ethAddress = _configService.getEthAddress();
+    return ethAddress;
+  }
+
   @override
   Future<bool> setupFromMnemonic(String mnemonic) async {
     final cryptoMnemonic = bip39.mnemonicToEntropy(mnemonic);
     final privateKey = await getPrivateKey(mnemonic);
+    final ethAddress = await getPublicAddress(privateKey);
     print(privateKey);
-    await _configService.setMnemonic(cryptoMnemonic);
+    await _configService.setMnemonic(mnemonic);
     await _configService.setPrivateKey(privateKey);
+    await _configService.setEthAddress(ethAddress.toString());
     await _configService.setupDone(true);
     return true;
   }
@@ -63,6 +81,10 @@ class AddressService implements IAddressService {
     await _configService.setMnemonic(null);
     await _configService.setupDone(true);
     await _configService.setPrivateKey(privateKey);
+    final ethAddress = await getPublicAddress(privateKey);
+    await _configService.setEthAddress(ethAddress.toString());
     return true;
   }
+
+  
 }

@@ -16,9 +16,10 @@ class AppTheme {
       fontFamily: kFontFamily,
       brightness: Brightness.light,
       textTheme: lightModeAppTextTheme(),
-      //accentColor: kPrimaryColor,      
-      //primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: Colors.white,
+      accentColor: kPrimaryColor,  
+      buttonColor: kPrimaryColor,    
+      primaryColor: kPrimaryColor,
+      //scaffoldBackgroundColor: scaffoldBackground,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Color(0xfff5f5f5),
       ),

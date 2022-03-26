@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hodl/configs/configs.dart';
 
 class CopyButton extends StatelessWidget {
   const CopyButton({
@@ -21,7 +22,7 @@ class CopyButton extends StatelessWidget {
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(radius),
                   side: const BorderSide(
-                      color: Colors.teal, 
+                      color: kBlack, 
                       width: 2.0,
                   ),
               ),

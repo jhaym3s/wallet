@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hodl/bloc/credential_bloc.dart';
-import 'package:hodl/components/intro_elevated_button.dart';
-import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 
-import '../../../configs/constants.dart';
-import '../../widgets/onboarding_item.dart';
+import '../../configs/configs.dart';
+import '../widgets/onboarding_item.dart';
 
-class IntroScreen extends StatefulWidget {
-  static const routeName = "/import_screen";
-  const IntroScreen({Key? key}) : super(key: key);
+class TestWidget extends StatefulWidget {
+  const TestWidget({Key? key}) : super(key: key);
 
   @override
-  State<IntroScreen> createState() => _IntroScreenState();
+  State<TestWidget> createState() => _TestWidgetState();
 }
 
-class _IntroScreenState extends State<IntroScreen>
-    with TickerProviderStateMixin {
+class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
   late AnimationController _rippleAnimationController;
   late PageController _pageController;
   late Animation<double> _rippleAnimation;
@@ -66,7 +60,8 @@ class _IntroScreenState extends State<IntroScreen>
     return Scaffold(
       body: SafeArea(
           child: SizedBox(
-        child: Column(children: [
+        child: Column(
+          children: [
           Expanded(
             child: PageView(
               controller: _pageController,
@@ -102,27 +97,20 @@ class _IntroScreenState extends State<IntroScreen>
             ],
           ),
           const Gap(30),
-          IntroElevatedButton(onPress: currentIndex != 2
-                    ? () {
-                        nextFunction();
-                      }
-                    : () {
-                        context.read<CredentialBloc>().add(GetMnemonicsEvent());
-                        Navigator.of(context).pushNamed(CreateWallet.routeName);
-                      }, label: 'Create Wallet',),
+          SizedBox(
+            width: kScreenWidth(context),
+            height: 50,
+            child: ElevatedButton(
+                onPressed: () {},
+                child: const Text("Create wallet"),
+                style: ElevatedButton.styleFrom(primary: kPrimaryColor)),
+          ),
           const Gap(10),
           SizedBox(
             width: kScreenWidth(context),
             height: 50,
             child: TextButton(
-                onPressed: currentIndex != 2
-                    ? () {
-                        nextFunction();
-                      }
-                    : () {
-                        context.read<CredentialBloc>().add(GetMnemonicsEvent());
-                        Navigator.of(context).pushNamed(ImportWallet.routeName);
-                      },
+                onPressed: () {},
                 child: const Text("Import Wallet"),
                 style: TextButton.styleFrom(primary: kTextColors)),
           ),
@@ -143,18 +131,15 @@ class Indicator extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Container(
-        height: 12,
-        width: positionIndex == currentIndex ? 24 : 12,
-        decoration: BoxDecoration(
-          // border: Border.all(color: k),
-          color: positionIndex == currentIndex
-              ? kPrimaryColor
-              : Theme.of(context).splashColor,
-          borderRadius: BorderRadius.circular(100),
-        ),
+    return Container(
+      height: 12,
+      width: positionIndex == currentIndex ? 24 : 12,
+      decoration: BoxDecoration(
+        // border: Border.all(color: k),
+        color: positionIndex == currentIndex
+            ? kPrimaryColor
+            : Theme.of(context).splashColor,
+        borderRadius: BorderRadius.circular(100),
       ),
     );
   }

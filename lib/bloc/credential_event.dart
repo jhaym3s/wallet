@@ -8,12 +8,7 @@ abstract class CredentialEvent extends Equatable{
 
 class GetMnemonicsEvent extends CredentialEvent{}
 
-class GetPrivateKeyEvent extends CredentialEvent{
-    final String mnemonics;
-    GetPrivateKeyEvent({required this.mnemonics});
-     @override
-  List<Object?> get props => [mnemonics];
-}
+class GetPrivateKeyEvent extends CredentialEvent{}
 
 class GetEthAddressEvent extends CredentialEvent{
   final String privateKey;
