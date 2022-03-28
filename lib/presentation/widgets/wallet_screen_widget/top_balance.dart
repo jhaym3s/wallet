@@ -17,7 +17,7 @@ class TopBalance extends StatelessWidget {
     return Container(
       width: kScreenWidth(context),
       height: kScreenHeight(context) / 3,
-      color: const Color.fromARGB(248, 250, 250, 250),
+      color: kPrimaryColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
         child: Column(
@@ -25,12 +25,12 @@ class TopBalance extends StatelessWidget {
             const Gap(30),
             Text("Account 1",style: Theme.of(context).textTheme.bodyText2,),
            const Gap(20),
-            const Text(
+            Text(
               "\$0.0", 
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 40),
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 40).copyWith(color: kWhite),
             ),
             const Gap(10),
-             CopyButton(text: Text(ethAddress), value: ethAddress,radius: 18,),
+             CopyButton(text: Text(ethAddress), value: ethAddress,radius: 18,color: kWhite,),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

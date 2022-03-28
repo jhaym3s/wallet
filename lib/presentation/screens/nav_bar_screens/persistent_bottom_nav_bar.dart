@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hodl/presentation/screens/nav_bar_screens/dapps.dart';
-import 'package:hodl/presentation/screens/nav_bar_screens/discover_screen.dart';
 import 'package:hodl/presentation/screens/nav_bar_screens/nav_bar_screens.dart';
-import 'package:hodl/presentation/screens/nav_bar_screens/settings_screen.dart';
-import 'package:hodl/presentation/screens/nav_bar_screens/wallet_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../../configs/configs.dart';
@@ -36,35 +32,35 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         iconSize: 22,
        icon: const Icon(Icons.account_balance_wallet_outlined),
         title: ("Wallet"),
-        activeColorPrimary: Colors.black,
+        activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         iconSize: 22,
         icon: const Icon(CupertinoIcons.compass_fill),
         title: ("Discover"),
-        activeColorPrimary: kBlack,
+        activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         iconSize: 22,
         icon: const Icon(CupertinoIcons.square_grid_2x2_fill),
         title: ("Browser"),
-       activeColorPrimary: Colors.black,
+       activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         iconSize: 22,
         icon: const Icon(Icons.settings),
         title: ("Setting"),
-        activeColorPrimary: Colors.black,
+        activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary:Colors.grey,
       ),
       PersistentBottomNavBarItem(
         iconSize: 22,
         icon: const Icon(CupertinoIcons.info),
         title: ("More"),
-        activeColorPrimary: Colors.black,
+        activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary:Colors.grey,
       ),
      

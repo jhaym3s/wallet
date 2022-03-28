@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../../configs/configs.dart';
 
@@ -13,11 +14,12 @@ class TopIconsAndLabel extends StatelessWidget {
     return Column(
       children: [
          CircleAvatar(
-          backgroundColor: kBlack,
+          backgroundColor: kWhite,
          // backgroundImage:  AssetImage(AssetsImages.buyIcon, ),
           child:Center(child: Image(image:  AssetImage(images))),
         ),
-        Text(label),
+        const Gap(5),
+        Text(label, style: Theme.of(context).textTheme.bodyText2!.copyWith(color: kWhite, fontWeight: FontWeight.bold),),
       ],
     );
   }

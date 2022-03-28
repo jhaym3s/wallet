@@ -53,8 +53,8 @@ class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen> with 
                 //   ),
                 //   color: Colors.grey.shade900,
                 // ),
-                labelColor: kBlack,
-                indicatorColor: kBlack,
+                labelColor: kPrimaryColor,
+                indicatorColor: kPrimaryColor,
                 labelStyle: Theme.of(context)
                     .textTheme
                     .bodyText1!
