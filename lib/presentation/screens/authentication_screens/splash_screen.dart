@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
+import 'package:hodl/configs/configs.dart';
 
 import 'intro_screen.dart';
 
@@ -20,23 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kSplashBackground,
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/images/wallet_safe.png"),
-              const Gap(20),
-              const Text(
-                "Secure & Decentralized",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const Gap(10),
-              const Text("Trusted by millions, HODL is a decentralized wallet making the world of web3 accessible to all.",textAlign: TextAlign.center,)
-            ],
-          ),
-        ),
+        child: Image.asset(AssetsImages.logo),
       ),
     );
   }

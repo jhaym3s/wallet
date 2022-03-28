@@ -1,11 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web3dart/credentials.dart';
 
 abstract class IConfigurationService {
   Future<void> setMnemonic(String? value);
   Future<void> setupDone(bool value);
   Future<void> setPrivateKey(String? value);
+  Future<void> setEthAddress(String? value);
   String? getMnemonic();
   String? getPrivateKey();
+  String? getEthAddress();
   bool didSetupWallet();
 }
 
@@ -29,6 +32,11 @@ class ConfigurationService implements IConfigurationService {
     await _preferences.setBool('didSetupWallet', value);
   }
 
+  @override
+  Future<void> setEthAddress(String? value) async {
+    await _preferences.setString('ethAddress', value ?? '');
+  }
+
   // gets
   @override
   String? getMnemonic() {
@@ -44,4 +52,11 @@ class ConfigurationService implements IConfigurationService {
   bool didSetupWallet() {
     return _preferences.getBool('didSetupWallet') ?? false;
   }
+
+  @override
+  String? getEthAddress() {
+    return _preferences.getString('ethAddress') ?? "";
+  }
+
+  
 }

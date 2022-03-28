@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => CredentialBloc(addressService: addressService),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
           title: 'Hodl',
           theme: AppTheme().lightTheme,
           darkTheme: AppTheme().darkTheme,

@@ -28,14 +28,16 @@ const double kBorderRadius = 10.0;
 const double kBottomNavBarHeight = 60.0;
 
 // Colors  Color(0xff248FF2)
-const Color kPrimaryColor = Color(0xff248FF2);
+const Color kPrimaryColor = Color(0xff4A1990);
 const Color kSecondaryColor = Color(0xFF0E34A0);
+const Color kSplashBackground = Color(0xFF3F157A);
+const Color kTextColors  = Color(0xff1B2052);
+const Color scaffoldBackground = Color(0xffE5E5E5);
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kBlack = Color(0xFF000000);
 const Color kDanger = Color(0xFFE22B23);
 const Color kGrey = Color(0xFF666666);
 const Color kInfo = Color(0xFF069AD6);
-const Color kWarning = Color(0xFFED9E03);
 const Color kTransparent = Colors.transparent;
 const Color kSuccess = Color(0xFF57CE7E);
 // Padding
@@ -124,6 +126,10 @@ class AssetsImages {
   static const recieveIcon = "assets/images/recieve.png";
   static const sendIcon = "assets/images/send.png";
   static const buyIcon ="assets/images/buy.png";
+  static const onboarding1 = "assets/images/onboarding-2.png";
+  static const onBoarding2 = "assets/images/onboarding-one.png";
+  static const onBoarding3 = "assets/images/onboarding-3.png";
+  static const logo = "assets/images/logo.png";
 }
 
 /// Preference keys used to store/read values using [AppPreferences].

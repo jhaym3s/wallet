@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hodl/presentation/screens/authentication_screens/intro_screen.dart';
 import 'package:hodl/presentation/screens/nav_bar_screens/persistent_bottom_nav_bar.dart';
-
 import '../presentation/screens/authentication_screens/authentication_screens.dart';
+import '../presentation/screens/index_token_screen.dart';
 import '../presentation/screens/nav_bar_screens/nav_bar_screens.dart';
 
 class AppRouter{
@@ -20,6 +19,12 @@ class AppRouter{
         return  MaterialPageRoute(builder: (_)=> const WalletScreen());
         case CustomNavigationBar.routeName:
         return  MaterialPageRoute(builder: (_)=> const CustomNavigationBar());
+        case ImportWithPrivateKey.routeName:
+        return  MaterialPageRoute(builder: (_)=> const ImportWithPrivateKey());
+         case ImportWithMnemonics.routeName:
+        return  MaterialPageRoute(builder: (_)=> const ImportWithMnemonics());
+         case IndexTokenScreen.routeName:
+        return  MaterialPageRoute(builder: (_)=> const IndexTokenScreen());
         // case HomeScreen.routeName:
         // return  MaterialPageRoute(builder: (_)=> const HomeScreen());
        

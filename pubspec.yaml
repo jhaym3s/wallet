@@ -51,6 +51,9 @@ dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
+  http: ^0.13.4
+  timeline: ^0.0.1
+  timelines: ^0.1.0
 
 dev_dependencies:
   flutter_test:

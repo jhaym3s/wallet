@@ -22,33 +22,36 @@ class CredentialBloc extends Bloc<CredentialEvent, CredentialState> {
     emit(CredentialLoadingState());
     try {
       final mnemonic = addressService.generateMnemonic();
-      final privateKey = await addressService.getPrivateKey(mnemonic);
-      final ethAddress = await addressService.getPublicAddress(privateKey);
-      CredentialSuccessState(
-        mnemonic: mnemonic,
-        address: ethAddress,
-        mnemonicsList: mnemonic.split(' '),
-        privateKey: privateKey,
-      );
+
+      if (await addressService.setupFromMnemonic(mnemonic)) {
+        final prefMnemonics = addressService.getPrefMnemonics();
+        emit(GenerateCredentialMnemonicsState(
+          mnemonic: mnemonic,
+        ));
+      }
+      ;
     } catch (_) {
       emit(CredentialFailureState());
     }
   }
 
-  FutureOr<void> getPrivateKey(GetPrivateKeyEvent event, Emitter<CredentialState> emit) async {
+  FutureOr<void> getPrivateKey(
+      GetPrivateKeyEvent event, Emitter<CredentialState> emit) async {
     emit(CredentialLoadingState());
     try {
-      final privateKey = await addressService.getPrivateKey(event.mnemonics);
-      emit(GetPrivateKeyState(privateKey: privateKey));
+      final prefPrivateKeys =  addressService.getPrefPrivateKey();
+      emit(GetPrivateKeyState(privateKey: prefPrivateKeys));
     } catch (_) {
-       emit(CredentialFailureState());
+      emit(CredentialFailureState());
     }
   }
 
-  FutureOr<void> getEthAddress(GetEthAddressEvent event, Emitter<CredentialState> emit) async {
+  FutureOr<void> getEthAddress(
+      GetEthAddressEvent event, Emitter<CredentialState> emit) async {
     emit(CredentialLoadingState());
     try {
-      final ethAddress = await addressService.getPublicAddress(event.privateKey);
+      final prefEthAddress = addressService.getprefEthAddress();
+      final ethAddress = await addressService.getPublicAddress(prefEthAddress!);
       emit(GetWalletAddressState(walletAddress: ethAddress));
     } catch (_) {
       emit(CredentialFailureState());
