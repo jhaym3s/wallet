@@ -130,6 +130,7 @@ class AssetsImages {
   static const onBoarding2 = "assets/images/onboarding-one.png";
   static const onBoarding3 = "assets/images/onboarding-3.png";
   static const logo = "assets/images/logo.png";
+  static const scan = "assets/images/scan.png";
 }
 
 /// Preference keys used to store/read values using [AppPreferences].
