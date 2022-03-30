@@ -31,8 +31,7 @@ class CoinGeko {
         this.atl,
         this.atlChangePercentage,
         this.atlDate,
-        this.roi,
-        this.lastUpdated,
+        this.isAdded,
     });
 
     String? id;
@@ -59,8 +58,7 @@ class CoinGeko {
     double? atl;
     double? atlChangePercentage;
     DateTime? atlDate;
-    Roi? roi;
-    DateTime? lastUpdated;
+    bool? isAdded;
 
     factory CoinGeko.fromJson(Map<String, dynamic> json) => CoinGeko(
         id: json["id"],
@@ -87,8 +85,7 @@ class CoinGeko {
         atl: json["atl"].toDouble(),
         atlChangePercentage: json["atl_change_percentage"].toDouble(),
         atlDate: DateTime.parse(json["atl_date"]),
-        roi: json["roi"] == null ? null : Roi.fromJson(json["roi"]),
-        lastUpdated: DateTime.parse(json["last_updated"]),
+       
     );
 
     Map<String, dynamic> toJson() => {
@@ -116,8 +113,7 @@ class CoinGeko {
         "atl": atl,
         "atl_change_percentage": atlChangePercentage,
         "atl_date": atlDate!.toIso8601String(),
-        "roi": roi == null ? null : roi!.toJson(),
-        "last_updated": lastUpdated!.toIso8601String(),
+       
     };
 }
 

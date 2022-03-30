@@ -1,3 +1,4 @@
+import 'package:hodl/data/coin_geko_repository.dart';
 import 'package:hodl/models/coin_geko_api.dart';
 import 'package:json_annotation/json_annotation.dart';
 
