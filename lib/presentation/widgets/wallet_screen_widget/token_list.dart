@@ -8,7 +8,7 @@ class TokenList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 3,
+      itemCount: 25,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),

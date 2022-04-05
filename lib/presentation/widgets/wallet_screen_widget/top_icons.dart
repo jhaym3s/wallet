@@ -4,7 +4,8 @@ import 'package:gap/gap.dart';
 import '../../../configs/configs.dart';
 
 class TopIconsAndLabel extends StatelessWidget {
-  const TopIconsAndLabel({ Key? key, required this.images, required this.label}) : super(key: key);
+  const TopIconsAndLabel({Key? key, required this.images, required this.label})
+      : super(key: key);
 
   final String images;
   final String label;
@@ -13,13 +14,19 @@ class TopIconsAndLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         CircleAvatar(
+        CircleAvatar(
           backgroundColor: kWhite,
-         // backgroundImage:  AssetImage(AssetsImages.buyIcon, ),
-          child:Center(child: Image(image:  AssetImage(images))),
+          // backgroundImage:  AssetImage(AssetsImages.buyIcon, ),
+          child: Center(child: Image(image: AssetImage(images))),
         ),
         const Gap(5),
-        Text(label, style: Theme.of(context).textTheme.bodyText2!.copyWith(color: kWhite, fontWeight: FontWeight.bold),),
+        Text(
+          label,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2!
+              .copyWith(color: kWhite, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }

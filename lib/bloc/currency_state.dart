@@ -8,17 +8,24 @@ class CurrencyInitial extends CurrencyState {
   List<Object?> get props => [];
 }
 
-class CurrencyLoading extends CurrencyState {
-  @override
-  List<Object?> get props => [];
-}
-
 class GetAllCurrencyState extends CurrencyState {
-  List<CurrencyModel> currencies;
+  final List<CoinGeko> coinGeko;
 
-  GetAllCurrencyState({required this.currencies});
+  GetAllCurrencyState({required this.coinGeko});
   
   @override
-  List<Object?> get props => [currencies];
+  List<Object?> get props => [coinGeko];
 }
+
+class CurrencyLoadingState extends CurrencyState{
+
+  @override
+  List<Object?> get props => [];
+  
+}
+
+class CurrencyErrorState extends CurrencyState{
+  @override
+  List<Object?> get props => [];
+} 
 
