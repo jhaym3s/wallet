@@ -12,7 +12,6 @@ class FindCurrencyByIdEvent extends CurrencyEvent{
 }
 
 class GetAllCurrrencyEvent extends CurrencyEvent{
-  
 
   @override
   List<Object?> get props => [];

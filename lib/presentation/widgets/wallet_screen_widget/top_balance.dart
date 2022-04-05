@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hodl/components/copy_button.dart';
+import 'package:hodl/bloc/currency_bloc.dart';
+import 'package:hodl/components/components.dart';
 import 'package:hodl/presentation/widgets/modal_sheet_child.dart';
-import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/top_icons.dart';
 
 import '../../../configs/configs.dart';
@@ -37,6 +38,7 @@ class TopBalance extends StatelessWidget {
                 InkWell(
                     child: Image.asset(AssetsImages.scan),
                     onTap: () {
+                      context.read<CurrencyBloc>().add(GetAllCurrrencyEvent());
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
@@ -44,12 +46,33 @@ class TopBalance extends StatelessWidget {
                         builder: (BuildContext context) {
                           return FractionallySizedBox(
                             heightFactor: 0.9,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: 20,
-                                itemBuilder: (context, index) {
-                                  return const ModalSheetChild();
-                                }),
+                            child: BlocBuilder<CurrencyBloc, CurrencyState>(
+                              builder: (context, state) {
+                                if (state is GetAllCurrencyState) {
+                                  return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: 30,
+                                      itemBuilder: (context, index) {
+                                        return ModalSheetChild(
+                                          coinGeko: state.coinGeko[index],
+                                        );
+                                      });
+                                }
+                                if(state is CurrencyErrorState){
+                                  return Column(
+                                    children: [
+                                      Image.asset(AssetsImages.logo),
+                                      const Gap(20),
+                                     Text("An error occured", style: Theme.of(context).textTheme.bodyText1,)
+                                    ],                                  
+                                    );
+                                }
+                                if(state is CurrencyLoadingState){
+                                    return const Loading(actionText: "Loading");
+                                }
+                                return const Loading(actionText: "Loading");
+                              },
+                            ),
                           );
                         },
                       );

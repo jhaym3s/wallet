@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hodl/components/components.dart';
 import 'package:hodl/presentation/widgets/nft_screen.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/successful_walllet_screen.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
@@ -37,25 +38,25 @@ class _WalletScreenState extends State<WalletScreen>
     return Scaffold(
       backgroundColor: kWhite,
       body: SafeArea(
-        child: 
-            BlocBuilder<CredentialBloc, CredentialState>(
-              builder: (context, state) {
-                if (state is GenerateCredentialMnemonicsState) {
-                  context.read<CredentialBloc>().add(GetPrivateKeyEvent());
-                }
-                if (state is GetPrivateKeyState) {
-                  context
-                      .read<CredentialBloc>()
-                      .add(GetEthAddressEvent(privateKey: state.privateKey!));
-                }
-                if (state is GetWalletAddressState) {
-                  return SuccessfullWalletScreen(ethAddress: state.walletAddress.toString());
-                }
-                return const Center(
-                  child: Text("Default"),
-                );
-              },
-            ),
+        child: BlocBuilder<CredentialBloc, CredentialState>(
+          builder: (context, state) {
+            if (state is GenerateCredentialMnemonicsState) {
+              context.read<CredentialBloc>().add(GetPrivateKeyEvent());
+            }
+            if (state is GetPrivateKeyState) {
+              context
+                  .read<CredentialBloc>()
+                  .add(GetEthAddressEvent(privateKey: state.privateKey!));
+            }
+            if (state is GetWalletAddressState) {
+              return SuccessfullWalletScreen(
+                  ethAddress: state.walletAddress.toString());
+            }
+            return const Center(
+              child: Loading(actionText: "Loading"),
+            );
+          },
+        ),
       ),
     );
   }

@@ -55,6 +55,7 @@ dependencies:
   timeline: ^0.0.1
   timelines: ^0.1.0
   json_annotation: ^4.4.0
+  flutter_switch: ^0.3.2
 
 
 dev_dependencies:
