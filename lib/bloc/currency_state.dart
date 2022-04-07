@@ -18,14 +18,19 @@ class GetAllCurrencyState extends CurrencyState {
 }
 
 class CurrencyLoadingState extends CurrencyState{
-
   @override
   List<Object?> get props => [];
-  
 }
 
 class CurrencyErrorState extends CurrencyState{
   @override
   List<Object?> get props => [];
-} 
+}
+
+class GetMainScreenListState extends CurrencyState{
+  final List<CoinGeko> mainScreenList;
+  GetMainScreenListState({required this.mainScreenList});
+  @override
+  List<Object?> get props => [mainScreenList];
+}
 

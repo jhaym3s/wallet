@@ -11,10 +11,39 @@ class FindCurrencyByIdEvent extends CurrencyEvent{
   List<Object?> get props => [id];
 }
 
-class GetAllCurrrencyEvent extends CurrencyEvent{
+class GetAllCurrenciesAndSave extends CurrencyEvent{
+  @override
+  List<Object?> get props => []; 
+}
 
+class GetAllSharedPrefCurrencyEvent extends CurrencyEvent{
   @override
   List<Object?> get props => [];
 }
+
+class GetMainListFromSharedPref extends CurrencyEvent{
+  @override
+  List<Object?> get props => [];
+}
+
+class AddToMainScreenListEvent extends CurrencyEvent{
+final String id;
+
+AddToMainScreenListEvent({required this.id});
+  @override
+  List<Object?> get props => [id];
+
+}
+
+class RemoveFromMainScreenListEvent extends CurrencyEvent{
+final String id;
+
+RemoveFromMainScreenListEvent({required this.id});
+  @override
+  List<Object?> get props => [id];
+
+}
+
+
 
 

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hodl/configs/configs.dart';
 import 'package:hodl/models/coin_geko_api.dart';
+
+import '../../bloc/currency_bloc.dart';
+import '../screens/nav_bar_screens/wallet_screen.dart';
 
 class ModalSheetChild extends StatefulWidget {
   const ModalSheetChild({Key? key, required this.coinGeko}) : super(key: key);
@@ -27,6 +31,8 @@ class _ModalSheetChildState extends State<ModalSheetChild> {
           onChanged: (val) {
             setState(() {
               toggle = val;
+              toggle?context.read<CurrencyBloc>().add(RemoveFromMainScreenListEvent(id: widget.coinGeko.id!)):
+            context.read<CurrencyBloc>().add(AddToMainScreenListEvent(id: widget.coinGeko.id!));
             });
           },
           value: toggle,

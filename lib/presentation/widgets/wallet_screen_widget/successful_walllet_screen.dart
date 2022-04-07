@@ -6,16 +6,18 @@ import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart'
 import '../../../configs/constants.dart';
 
 class SuccessfullWalletScreen extends StatefulWidget {
-  const SuccessfullWalletScreen({ Key? key, required this.ethAddress}) : super(key: key);
+  const SuccessfullWalletScreen({Key? key, required this.ethAddress})
+      : super(key: key);
 
   final String ethAddress;
 
   @override
-  State<SuccessfullWalletScreen> createState() => _SuccessfullWalletScreenState();
+  State<SuccessfullWalletScreen> createState() =>
+      _SuccessfullWalletScreenState();
 }
 
-class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen> with SingleTickerProviderStateMixin{
-
+class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -35,49 +37,49 @@ class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen> with 
     return Column(
       children: [
         TopBalance(
-          ethAddress:widget.ethAddress,
-                ),
+          ethAddress: widget.ethAddress,
+        ),
         Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.circular(
-                  10.0,
-                ),
-              ),
-              child: TabBar(
-                controller: _tabController,
-                // indicator: BoxDecoration(
-                //   borderRadius: BorderRadius.circular(
-                //     10.0,
-                //   ),
-                //   color: Colors.grey.shade900,
-                // ),
-                labelColor: kPrimaryColor,
-                indicatorColor: kPrimaryColor,
-                labelStyle: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
-                unselectedLabelColor: Colors.grey[500],
-                tabs: const [
-                  Tab(
-                    text: 'Tokens',
-                  ),
-                  Tab(
-                    text: "NFT",
-                  ),
-                ],
-              ),
+          height: 50,
+          decoration: BoxDecoration(
+            color: kWhite,
+            borderRadius: BorderRadius.circular(
+              10.0,
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: const [
-                  TokenList(), 
-                  NftScreen()],
+          ),
+          child: TabBar(
+            controller: _tabController,
+            // indicator: BoxDecoration(
+            //   borderRadius: BorderRadius.circular(
+            //     10.0,
+            //   ),
+            //   color: Colors.grey.shade900,
+            // ),
+            labelColor: kPrimaryColor,
+            indicatorColor: kPrimaryColor,
+            labelStyle: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+            unselectedLabelColor: Colors.grey[500],
+            tabs: const [
+              Tab(
+                text: 'Tokens',
               ),
-            ),
+              Tab(
+                text: "NFT",
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              TokenList(),
+               NftScreen()],
+          ),
+        ),
       ],
     );
   }

@@ -38,7 +38,7 @@ class TopBalance extends StatelessWidget {
                 InkWell(
                     child: Image.asset(AssetsImages.scan),
                     onTap: () {
-                      context.read<CurrencyBloc>().add(GetAllCurrrencyEvent());
+                      context.read<CurrencyBloc>().add(GetAllSharedPrefCurrencyEvent());
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
