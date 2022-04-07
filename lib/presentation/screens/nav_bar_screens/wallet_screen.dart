@@ -7,6 +7,7 @@ import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart';
 
 import '../../../bloc/credential_bloc.dart';
+import '../../../bloc/currency_bloc.dart';
 import '../../../configs/configs.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _WalletScreenState extends State<WalletScreen>
 
   @override
   void initState() {
+   context.read<CurrencyBloc>().add(GetAllCurrenciesAndSave());
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -60,4 +62,7 @@ class _WalletScreenState extends State<WalletScreen>
       ),
     );
   }
+}
+
+class GetAllSharedPrefCurrencyEvent {
 }

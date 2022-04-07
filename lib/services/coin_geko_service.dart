@@ -17,18 +17,22 @@ class CoinGekoService implements ICoinGekoService {
   CoinGekoService(
       {required this.currencyService, required this.coinGekoRespository});
 
-  List<CoinGeko> allCoinGekoCurrencies = [];
+  List<CoinGeko> _allCoinGekoCurrencies = [];
+
+  List<CoinGeko> get allCoinGekoCurrencies {
+    return [..._allCoinGekoCurrencies];
+  }
 
   @override
-  void getCoinGekoCurrency() async {
+  Future getCoinGekoCurrency() async {
     List<CoinGeko> coinGekoList = await coinGekoRespository.getCoinAsset();
-    allCoinGekoCurrencies = coinGekoList;
+    _allCoinGekoCurrencies = coinGekoList;
    // return allCoinGekoCurrencies;
   }
 
   @override
   void saveAllCurrencyToSharedPreference() async {
-    await currencyService.saveList("coinGeko", allCoinGekoCurrencies);
+    await currencyService.saveList("coinGeko", _allCoinGekoCurrencies);
   }
 
   @override
@@ -43,19 +47,19 @@ class CoinGekoService implements ICoinGekoService {
   @override
   void addToMainScreenList(String id) {
     CoinGeko currency =
-        allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
+        _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
     mainScreenList.add(currency);
   }
 
   @override
   void removeFromMainScreen(String id) {
     CoinGeko currency =
-        allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
+        _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
         mainScreenList.remove(currency);
   }
 
   setToBool(String id){
-    CoinGeko currency = allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
+    CoinGeko currency = _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
     currency.isAdded == true;
   }
 

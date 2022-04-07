@@ -4,7 +4,9 @@ import 'package:hodl/bloc/currency_bloc.dart';
 import 'package:hodl/configs/configs.dart';
 import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 import 'package:hodl/services/address_service.dart';
+import 'package:hodl/services/coin_geko_service.dart';
 import 'package:hodl/services/configuration_service.dart';
+import 'package:hodl/services/currency_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +22,9 @@ Future<void> main() async {
     addressService: AddressService(
       ConfigurationService(await SharedPreferences.getInstance()),
     ),
-    coinGekoRespository: coinGekoRespository,
+    coinGekoService: CoinGekoService(
+        currencyService: CurrencyService(await SharedPreferences.getInstance()),
+        coinGekoRespository: coinGekoRespository),
   ));
 }
 
@@ -28,10 +32,11 @@ class MyApp extends StatelessWidget {
   const MyApp(
       {Key? key,
       required this.addressService,
-      required this.coinGekoRespository})
+      required this.coinGekoService})
       : super(key: key);
   final AddressService addressService;
-  final CoinGekoRespository coinGekoRespository;
+  
+  final CoinGekoService coinGekoService;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +47,8 @@ class MyApp extends StatelessWidget {
               CredentialBloc(addressService: addressService),
         ),
         BlocProvider<CurrencyBloc>(
-          create: (BuildContext context) =>
-              CurrencyBloc(coinGekoRespository: coinGekoRespository),
+          create: (BuildContext context) => CurrencyBloc(
+              coinGekoService: coinGekoService),
         ),
       ],
       child: MaterialApp(
