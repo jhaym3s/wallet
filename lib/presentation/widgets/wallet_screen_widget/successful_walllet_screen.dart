@@ -6,10 +6,13 @@ import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart'
 import '../../../configs/constants.dart';
 
 class SuccessfullWalletScreen extends StatefulWidget {
-  const SuccessfullWalletScreen({Key? key, required this.ethAddress})
+  const SuccessfullWalletScreen({Key? key, required this.ethAddress, 
+  required this.currencyList
+  })
       : super(key: key);
 
   final String ethAddress;
+  final List currencyList;
 
   @override
   State<SuccessfullWalletScreen> createState() =>
@@ -75,9 +78,12 @@ class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen>
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
-              TokenList(),
-               NftScreen()],
+            children:  [
+               TokenList(
+               selectedCurrencyList: widget.currencyList,
+                ),
+               const NftScreen()
+               ],
           ),
         ),
       ],

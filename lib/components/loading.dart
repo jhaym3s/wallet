@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gap/gap.dart';
 import 'package:hodl/configs/configs.dart';
 
 class Loading extends StatelessWidget {
@@ -15,6 +16,7 @@ class Loading extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(actionText),
+           const Gap(20),
              const SpinKitWanderingCubes(color: kPrimaryColor),
           ],
         ),

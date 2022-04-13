@@ -4,11 +4,11 @@ import 'package:hodl/services/currency_service.dart';
 import '../models/coin_geko_api.dart';
 
 abstract class ICoinGekoService {
-  void getCoinGekoCurrency();
-  void saveAllCurrencyToSharedPreference();
-  List<CoinGeko> getAllCurrencyFromSharedPreference();
-  void addToMainScreenList(String id);
-  void removeFromMainScreen(String id);
+  void getCurrencies();
+  void saveCurrencies();
+  List<CoinGeko> getSavedCurrencies();
+  void addToSelectedCurrencies(String id);
+  void removeFromSelectedCurrecies(String id);
 }
 
 class CoinGekoService implements ICoinGekoService {
@@ -17,57 +17,66 @@ class CoinGekoService implements ICoinGekoService {
   CoinGekoService(
       {required this.currencyService, required this.coinGekoRespository});
 
-  List<CoinGeko> _allCoinGekoCurrencies = [];
+  List<CoinGeko> _allCurrency = [];
+  final String allCurrencyKey = "allCurrency";
+  final String selectedCurrencyKey = "selectedKey";
 
-  List<CoinGeko> get allCoinGekoCurrencies {
-    return [..._allCoinGekoCurrencies];
+  List<CoinGeko> get allCurrency {
+    return [..._allCurrency];
+  }
+
+  CoinGeko get bnb {
+    return _allCurrency.firstWhere((coin) => coin.id == "");
   }
 
   @override
-  Future getCoinGekoCurrency() async {
+  Future getCurrencies() async {
     List<CoinGeko> coinGekoList = await coinGekoRespository.getCoinAsset();
-    _allCoinGekoCurrencies = coinGekoList;
+    _allCurrency = coinGekoList;
+    print(_allCurrency);
    // return allCoinGekoCurrencies;
   }
 
   @override
-  void saveAllCurrencyToSharedPreference() async {
-    await currencyService.saveList("coinGeko", _allCoinGekoCurrencies);
+  void saveCurrencies() async {
+    await currencyService.saveList(allCurrencyKey, allCurrency);
+    print("object");
   }
 
   @override
-  List<CoinGeko> getAllCurrencyFromSharedPreference() {
-    final sharedprefGekoList = currencyService.getList("coinGeko");
+  List<CoinGeko> getSavedCurrencies() {
+    final sharedprefGekoList = currencyService.getList(allCurrencyKey);
+    print(sharedprefGekoList);
     return sharedprefGekoList;
   }
 
-  List<CoinGeko> mainScreenList = [];
+  List<CoinGeko> selectedCurrency = [];
 
 
   @override
-  void addToMainScreenList(String id) {
+  void addToSelectedCurrencies(String id) {
     CoinGeko currency =
-        _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
-    mainScreenList.add(currency);
+        _allCurrency.firstWhere((coin) => coin.id == id);
+    selectedCurrency.add(currency);
   }
 
   @override
-  void removeFromMainScreen(String id) {
+  void removeFromSelectedCurrecies(String id) {
     CoinGeko currency =
-        _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
-        mainScreenList.remove(currency);
+        _allCurrency.firstWhere((coin) => coin.id == id);
+        selectedCurrency.remove(currency);
   }
 
   setToBool(String id){
-    CoinGeko currency = _allCoinGekoCurrencies.firstWhere((coin) => coin.id == id);
+    CoinGeko currency = _allCurrency.firstWhere((coin) => coin.id == id);
     currency.isAdded == true;
   }
 
-  void saveMainScreenListToSharedPreference()async{
-      await currencyService.saveList("mainScreenList", mainScreenList);
+  void saveSelectedCurency()async{
+      await currencyService.saveList(selectedCurrencyKey, selectedCurrency);
   }
   
-  List<CoinGeko> getMainScreenListFromSharedPref(){
-      return currencyService.getList("mainScreenList");
+  List<CoinGeko> getSavedSelectedCurrency(){
+      return currencyService.getList(selectedCurrencyKey);
   }
 }

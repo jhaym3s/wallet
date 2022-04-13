@@ -1,38 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../../models/coin_geko_api.dart';
 import '../../screens/index_token_screen.dart';
 
 class TokenListItem extends StatelessWidget {
-  const TokenListItem({ Key? key, required this.coinGeko}) : super(key: key);
+  const TokenListItem({Key? key, required this.currency}) : super(key: key);
 
-  final CoinGeko coinGeko;
+  final CoinGeko currency;
 
   @override
   Widget build(BuildContext context) {
-     return Column(
-       children: [
-         ListTile(
+    return Column(
+      children: [
+        ListTile(
           onTap: () {
-            pushNewScreenWithRouteSettings(context,
-                screen: const IndexTokenScreen(),
-                settings:
-                    const RouteSettings(name: IndexTokenScreen.routeName, arguments: "id"));
-            //Navigator.of(context).pushNamed("");
+            //Navigator.push(context, MaterialPageRoute(builder: (context) => IndexTokenScreen(id: currency.id)));
+           pushNewScreenWithRouteSettings(
+        context,
+        settings:  RouteSettings(name: IndexTokenScreen.routeName,arguments: currency.id),
+        screen: const IndexTokenScreen(),
+        withNavBar: false,
+        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+    );
           },
           leading: CircleAvatar(
-            backgroundColor: Colors.grey[300],
+            radius: 20.0,
+            backgroundImage: NetworkImage(currency.image!),
+            backgroundColor: Colors.transparent,
           ),
           title: Text(
-            coinGeko.name!,
+            currency.name!,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
-            coinGeko.currentPrice.toString(),
+            currency.currentPrice.toString(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2!
@@ -43,7 +50,7 @@ class TokenListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                coinGeko.symbol!,
+                currency.symbol!.toUpperCase(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -58,9 +65,9 @@ class TokenListItem extends StatelessWidget {
               )
             ],
           ),
-    ),
-       const Divider()
-       ],
-     );
+        ),
+        const Divider()
+      ],
+    );
   }
 }

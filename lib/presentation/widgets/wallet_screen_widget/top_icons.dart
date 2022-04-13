@@ -4,18 +4,20 @@ import 'package:gap/gap.dart';
 import '../../../configs/configs.dart';
 
 class TopIconsAndLabel extends StatelessWidget {
-  const TopIconsAndLabel({Key? key, required this.images, required this.label})
+  const TopIconsAndLabel({Key? key, required this.images, required this.label,this.backGroundColor = kWhite})
       : super(key: key);
 
   final String images;
   final String label;
+  final Color backGroundColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CircleAvatar(
-          backgroundColor: kWhite,
+          backgroundColor: backGroundColor,
+          radius: 30,
           // backgroundImage:  AssetImage(AssetsImages.buyIcon, ),
           child: Center(child: Image(image: AssetImage(images))),
         ),
@@ -25,7 +27,7 @@ class TopIconsAndLabel extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyText2!
-              .copyWith(color: kWhite, fontWeight: FontWeight.bold),
+              .copyWith(color: backGroundColor, fontWeight: FontWeight.bold, fontSize: 17),
         ),
       ],
     );

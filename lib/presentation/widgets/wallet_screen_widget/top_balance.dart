@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hodl/bloc/currency_bloc.dart';
+import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:hodl/components/components.dart';
 import 'package:hodl/presentation/widgets/modal_sheet_child.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/top_icons.dart';
@@ -38,7 +38,7 @@ class TopBalance extends StatelessWidget {
                 InkWell(
                     child: Image.asset(AssetsImages.scan),
                     onTap: () {
-                      context.read<CurrencyBloc>().add(GetAllSharedPrefCurrencyEvent());
+                      // context.read<CredentialBloc>().add(GetCurrencies());
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
@@ -46,29 +46,34 @@ class TopBalance extends StatelessWidget {
                         builder: (BuildContext context) {
                           return FractionallySizedBox(
                             heightFactor: 0.9,
-                            child: BlocBuilder<CurrencyBloc, CurrencyState>(
+                            child: BlocBuilder<WalletBloc, WalletState>(
                               builder: (context, state) {
-                                if (state is GetAllCurrencyState) {
+                                if (state is DisplayWalletItemState) {
                                   return ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: 30,
                                       itemBuilder: (context, index) {
                                         return ModalSheetChild(
-                                          coinGeko: state.coinGeko[index],
+                                          coinGeko: state.allCurrencies[index],
                                         );
                                       });
                                 }
-                                if(state is CurrencyErrorState){
+                                if (state is CredentialFailureState) {
                                   return Column(
                                     children: [
                                       Image.asset(AssetsImages.logo),
                                       const Gap(20),
-                                     Text("An error occured", style: Theme.of(context).textTheme.bodyText1,)
-                                    ],                                  
-                                    );
+                                      Text(
+                                        "An error occured",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      )
+                                    ],
+                                  );
                                 }
-                                if(state is CurrencyLoadingState){
-                                    return const Loading(actionText: "Loading");
+                                if (state is CredentialLoadingState) {
+                                  return const Loading(actionText: "Loading");
                                 }
                                 return const Loading(actionText: "Loading");
                               },
@@ -87,7 +92,7 @@ class TopBalance extends StatelessWidget {
             ),
             const Gap(10),
             CopyButton(
-              text: Text(ethAddress),
+              text: const Text("Public Address"),
               value: ethAddress,
               radius: 18,
               color: kWhite,

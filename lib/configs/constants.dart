@@ -132,6 +132,8 @@ class AssetsImages {
   static const logo = "assets/images/logo.png";
   static const scan = "assets/images/scan.png";
   static const ethIcon =  "assets/images/ethIcon.png";
+  static const recieveWhite = "assets/images/recieve-white.png";
+  static const sendWhite = "assets/images/send-white.png";
 }
 
 /// Preference keys used to store/read values using [AppPreferences].

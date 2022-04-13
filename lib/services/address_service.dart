@@ -73,6 +73,7 @@ class AddressService implements IAddressService {
     await _configService.setPrivateKey(privateKey);
     await _configService.setEthAddress(ethAddress.toString());
     await _configService.setupDone(true);
+    print("Done");
     return true;
   }
 

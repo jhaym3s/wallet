@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:hodl/components/components.dart';
 import 'package:hodl/presentation/widgets/nft_screen.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/successful_walllet_screen.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart';
 
-import '../../../bloc/credential_bloc.dart';
-import '../../../bloc/currency_bloc.dart';
+import '../../../bloc/wallet_bloc.dart';
 import '../../../configs/configs.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -18,21 +18,14 @@ class WalletScreen extends StatefulWidget {
   _WalletScreenState createState() => _WalletScreenState();
 }
 
-class _WalletScreenState extends State<WalletScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
+class _WalletScreenState extends State<WalletScreen> {
   @override
   void initState() {
-   context.read<CurrencyBloc>().add(GetAllCurrenciesAndSave());
-    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
-
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
   }
 
   @override
@@ -40,19 +33,35 @@ class _WalletScreenState extends State<WalletScreen>
     return Scaffold(
       backgroundColor: kWhite,
       body: SafeArea(
-        child: BlocBuilder<CredentialBloc, CredentialState>(
+        child: BlocBuilder<WalletBloc, WalletState>(
           builder: (context, state) {
-            if (state is GenerateCredentialMnemonicsState) {
-              context.read<CredentialBloc>().add(GetPrivateKeyEvent());
+            if (state is DisplayMnemonicsState) {
+              context.read<WalletBloc>().add(GetWallaetItem());
             }
-            if (state is GetPrivateKeyState) {
-              context
-                  .read<CredentialBloc>()
-                  .add(GetEthAddressEvent(privateKey: state.privateKey!));
-            }
-            if (state is GetWalletAddressState) {
+            if (state is DisplayWalletItemState) {
               return SuccessfullWalletScreen(
-                  ethAddress: state.walletAddress.toString());
+                ethAddress: state.walletAddress!,
+                currencyList: state.allCurrencies,
+              );
+            }
+            if(state is CredentialLoadingState){
+              const Center(child: Loading(actionText: "Loading",));
+            }
+            if (state is CredentialFailureState) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(AssetsImages.logo),
+                    const Gap(20),
+                    Text(
+                      "An error occured",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    )
+                  ],
+                ),
+              );
             }
             return const Center(
               child: Loading(actionText: "Loading"),
@@ -64,5 +73,4 @@ class _WalletScreenState extends State<WalletScreen>
   }
 }
 
-class GetAllSharedPrefCurrencyEvent {
-}
+class GetAllSharedPrefCurrencyEvent {}
