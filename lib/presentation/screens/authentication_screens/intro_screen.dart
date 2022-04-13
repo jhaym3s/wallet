@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hodl/bloc/credential_bloc.dart';
+import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:hodl/components/intro_elevated_button.dart';
 import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 
@@ -102,14 +102,18 @@ class _IntroScreenState extends State<IntroScreen>
             ],
           ),
           const Gap(30),
-          IntroElevatedButton(onPress: currentIndex != 2
-                    ? () {
-                        nextFunction();
-                      }
-                    : () {
-                        context.read<CredentialBloc>().add(GetMnemonicsEvent());
-                        Navigator.of(context).pushNamed(CreateWallet.routeName);
-                      }, label: 'Create Wallet',),
+          IntroElevatedButton(
+            onPress: currentIndex != 2
+                ? () {
+                    nextFunction();
+                  }
+                : () {
+                    context.read<WalletBloc>().add(GenerateMnmonics());
+                    context.read<WalletBloc>().add(GetSavedMnemonics());
+                    Navigator.of(context).pushNamed(CreateWallet.routeName);
+                  },
+            label: 'Create Wallet',
+          ),
           const Gap(10),
           SizedBox(
             width: kScreenWidth(context),
@@ -120,8 +124,10 @@ class _IntroScreenState extends State<IntroScreen>
                         nextFunction();
                       }
                     : () {
-                        context.read<CredentialBloc>().add(GetMnemonicsEvent());
-                        Navigator.of(context).pushNamed(ImportWallet.routeName);
+                        // context
+                        //     .read<CredentialBloc>()
+                        //     .add(DisplayMnemonicsEvent());
+                        // Navigator.of(context).pushNamed(ImportWallet.routeName);
                       },
                 child: const Text("Import Wallet"),
                 style: TextButton.styleFrom(primary: kTextColors)),

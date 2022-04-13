@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hodl/presentation/widgets/create_wallet_success_screen.dart';
 
-import '../../../bloc/credential_bloc.dart';
+import '../../../bloc/wallet_bloc.dart';
 import '../../../components/loading.dart';
 
 //final productId = ModalRoute.of(context).settings.arguments as String;
@@ -21,9 +21,9 @@ class _CreateWalletState extends State<CreateWallet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CredentialBloc, CredentialState>(
+    return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
-        if(state is GenerateCredentialMnemonicsState){
+        if(state is DisplayMnemonicsState){
           return CreateWalletSuccessScreen(mnmonics: state.mnemonic!);
         }
         if(state is CredentialLoadingState){
