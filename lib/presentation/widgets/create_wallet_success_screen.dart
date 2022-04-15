@@ -65,8 +65,8 @@ class CreateWalletSuccessScreen extends StatelessWidget {
             ],
           ),
         ),
-        IntroElevatedButton(
-            onPress: () {
+        CustomElevatedButton(
+            onPressed: () {
               Navigator.of(context).popAndPushNamed(
                 CustomNavigationBar.routeName,
               );

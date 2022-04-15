@@ -86,9 +86,11 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
   FutureOr<void> findCurrencyWithId(
       FindCurrencyEvent event, Emitter<WalletState> emit) {
     final allCurrencies = coinGekoService.allCurrency;
+    final prefEthAddress = addressService.getprefEthAddress();
     print("object");
     emit(DisplaySpecificCurrency(
-      currency: allCurrencies.firstWhere((currency) => currency.id == event.id )
+      currency: allCurrencies.firstWhere((currency) => currency.id == event.id),
+      walletAddress: prefEthAddress!,
        ));
   }
 }

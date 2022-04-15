@@ -41,8 +41,8 @@ class TopBalance extends StatelessWidget {
                       // context.read<CredentialBloc>().add(GetCurrencies());
                       showModalBottomSheet<void>(
                         context: context,
-                        isScrollControlled: true,
-                        isDismissible: true,
+                        //isScrollControlled: true,
+                        //isDismissible: true,
                         builder: (BuildContext context) {
                           return FractionallySizedBox(
                             heightFactor: 0.9,
@@ -101,12 +101,27 @@ class TopBalance extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                TopIconsAndLabel(images: AssetsImages.sendIcon, label: "Send"),
+              children: [
                 TopIconsAndLabel(
-                    images: AssetsImages.recieveIcon, label: "Recieve"),
-                TopIconsAndLabel(images: AssetsImages.buyIcon, label: "Buy"),
-                TopIconsAndLabel(images: AssetsImages.swapIcon, label: "Swap")
+                  images: AssetsImages.sendIcon,
+                  label: "Send",
+                  onTap: () {},
+                ),
+                TopIconsAndLabel(
+                  images: AssetsImages.recieveIcon,
+                  label: "Recieve",
+                  onTap: () {},
+                ),
+                TopIconsAndLabel(
+                  images: AssetsImages.buyIcon,
+                  label: "Buy",
+                  onTap: () {},
+                ),
+                TopIconsAndLabel(
+                  images: AssetsImages.swapIcon,
+                  label: "Swap",
+                  onTap: () {},
+                )
               ],
             ),
           ],

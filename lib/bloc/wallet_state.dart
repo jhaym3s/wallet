@@ -41,10 +41,11 @@ class DisplayWalletItemState extends WalletState {
 
 class DisplaySpecificCurrency extends WalletState {
   final CoinGeko currency;
+  final String walletAddress;
 
-  DisplaySpecificCurrency({required this.currency});
+  DisplaySpecificCurrency({required this.currency, required this.walletAddress});
   @override
-  List<Object?> get props => [currency];
+  List<Object?> get props => [currency,walletAddress];
 }
 
 class CredentialFailureState extends WalletState {

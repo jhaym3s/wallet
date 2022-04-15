@@ -3,6 +3,7 @@ import 'package:hodl/presentation/screens/nav_bar_screens/persistent_bottom_nav_
 import '../presentation/screens/authentication_screens/authentication_screens.dart';
 import '../presentation/screens/index_token_screen.dart';
 import '../presentation/screens/nav_bar_screens/nav_bar_screens.dart';
+import '../presentation/screens/transactions/send.dart';
 
 class AppRouter{
 
@@ -25,6 +26,8 @@ class AppRouter{
         return  MaterialPageRoute(builder: (_)=> const ImportWithMnemonics());
          case IndexTokenScreen.routeName:
         return  MaterialPageRoute(builder: (_)=> const IndexTokenScreen());
+        case SendScreen.routeName:
+        return  MaterialPageRoute(builder: (_)=> const SendScreen());
         // case HomeScreen.routeName:
         // return  MaterialPageRoute(builder: (_)=> const HomeScreen());
        

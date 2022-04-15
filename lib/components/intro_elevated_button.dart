@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../configs/constants.dart';
 
-class IntroElevatedButton extends StatelessWidget {
-  const IntroElevatedButton({ Key? key, required this.onPress, required this.label}) : super(key: key);
+class CustomElevatedButton extends StatelessWidget {
+  const CustomElevatedButton({ Key? key, required this.onPressed, required this.label}) : super(key: key);
 
-  final Function() onPress;
+  final Function() onPressed;
   final String label;
 
   @override
@@ -16,7 +16,7 @@ class IntroElevatedButton extends StatelessWidget {
               width: kScreenWidth(context),
               height: 50,
               child: ElevatedButton(
-                onPressed: onPress,
+                onPressed: onPressed,
                 child: Text(label),
                 style: ButtonStyle(
                   backgroundColor:

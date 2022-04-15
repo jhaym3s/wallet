@@ -102,8 +102,8 @@ class _IntroScreenState extends State<IntroScreen>
             ],
           ),
           const Gap(30),
-          IntroElevatedButton(
-            onPress: currentIndex != 2
+          CustomElevatedButton(
+            onPressed: currentIndex != 2
                 ? () {
                     nextFunction();
                   }
