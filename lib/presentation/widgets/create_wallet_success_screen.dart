@@ -65,13 +65,18 @@ class CreateWalletSuccessScreen extends StatelessWidget {
             ],
           ),
         ),
-        CustomElevatedButton(
-            onPressed: () {
-              Navigator.of(context).popAndPushNamed(
-                CustomNavigationBar.routeName,
-              );
-            },
-            label: "Continue")
+        Expanded(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).popAndPushNamed(
+                    CustomNavigationBar.routeName,
+                  );
+                },
+                label: "Continue"),
+          ),
+        )
       ],
     )
     ));
