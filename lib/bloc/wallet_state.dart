@@ -14,7 +14,7 @@ class CredentialLoadingState extends WalletState {
 }
 
 class DisplayMnemonicsState extends WalletState {
-  final String? mnemonic;
+  final String mnemonic;
   DisplayMnemonicsState({
     required this.mnemonic,
   });
@@ -23,25 +23,26 @@ class DisplayMnemonicsState extends WalletState {
 }
 
 class DisplayWalletItemState extends WalletState {
-  final String? walletAddress;
+  final String  walletAddress;
   final List<CoinGeko> allCurrencies;
   final List<CoinGeko> selectedCurrency;
-  final CoinGeko? currencyTabbed;
+  //final EtherAmount currencyBalance;
 
   DisplayWalletItemState({
     required this.walletAddress,
     required this.selectedCurrency,
     required this.allCurrencies,
-    this.currencyTabbed,
+    //required this.currencyBalance,
   });
   @override
-  List<Object?> get props => [walletAddress, selectedCurrency, allCurrencies];
+  List<Object?> get props => [walletAddress, selectedCurrency, allCurrencies,];
 }
 
 
 class DisplaySpecificCurrency extends WalletState {
   final CoinGeko currency;
   final String walletAddress;
+  //final EtherAmount balance;
 
   DisplaySpecificCurrency({required this.currency, required this.walletAddress});
   @override

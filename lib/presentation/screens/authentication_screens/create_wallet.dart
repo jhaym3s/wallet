@@ -24,7 +24,7 @@ class _CreateWalletState extends State<CreateWallet> {
     return BlocBuilder<WalletBloc, WalletState>(
       builder: (context, state) {
         if(state is DisplayMnemonicsState){
-          return CreateWalletSuccessScreen(mnmonics: state.mnemonic!);
+          return CreateWalletSuccessScreen(mnmonics: state.mnemonic);
         }
         if(state is CredentialLoadingState){
           return const Loading(actionText: "Creating wallet",);

@@ -40,7 +40,7 @@ class _WalletScreenState extends State<WalletScreen> {
             }
             if (state is DisplayWalletItemState) {
               return SuccessfullWalletScreen(
-                ethAddress: state.walletAddress!,
+                ethAddress: state.walletAddress,
                 currencyList: state.allCurrencies,
               );
             }

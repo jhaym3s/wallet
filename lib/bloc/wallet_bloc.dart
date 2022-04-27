@@ -14,7 +14,8 @@ part 'wallet_state.dart';
 class WalletBloc extends Bloc<WalletEvent, WalletState> {
   AddressService addressService;
   CoinGekoService coinGekoService;
-  WalletBloc({required this.addressService, required this.coinGekoService})
+  //ContractService contractService;
+  WalletBloc({required this.addressService, required this.coinGekoService,})
       : super(CredentialInitial()) {
     on<GenerateMnmonics>(generateMnemonics);
     on<GetSavedMnemonics>(getPrefMnemonics);
@@ -40,7 +41,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     try {
       final prefMnemonics = addressService.getPrefMnemonics();
       emit(DisplayMnemonicsState(
-        mnemonic: prefMnemonics,
+        mnemonic: prefMnemonics!,
       ));
     } catch (_) {
       emit(CredentialFailureState());
@@ -57,7 +58,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
       final allCurrency = coinGekoService.allCurrency;
       print("done");
       emit(DisplayWalletItemState(
-          walletAddress: prefEthAddress,
+          walletAddress: prefEthAddress!,
           selectedCurrency: selectedCurrency,
         //  currencyTabbed: allCurrency.firstWhere((element) => element.id == "id"),
           allCurrencies: allCurrency));
