@@ -108,6 +108,8 @@ class _IntroScreenState extends State<IntroScreen>
                     nextFunction();
                   }
                 : () {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Please wait'),));
                     context.read<WalletBloc>().add(GenerateMnmonics());
                     context.read<WalletBloc>().add(GetSavedMnemonics());
                     Navigator.of(context).pushNamed(CreateWallet.routeName);

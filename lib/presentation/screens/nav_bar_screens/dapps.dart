@@ -16,7 +16,7 @@ class _DappsState extends State<Dapps> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: kBlack,
+            backgroundColor: kPrimaryColor,
             // The search area here
             title: Container(
               width: double.infinity,
@@ -26,9 +26,8 @@ class _DappsState extends State<Dapps> {
               child: Center(
                 child: TextField(
                   controller: textEditingController,
-                  cursorColor: kBlack,
-                  
-                  showCursor: false,
+                  cursorColor: kPrimaryColor,
+                  showCursor: true, 
                   decoration: InputDecoration(
                     
                       prefixIcon: IconButton(

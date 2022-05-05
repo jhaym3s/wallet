@@ -37,56 +37,58 @@ class _SuccessfullWalletScreenState extends State<SuccessfullWalletScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TopBalance(
-          ethAddress: widget.ethAddress,
-        ),
-        Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.circular(
-              10.0,
+    return Scaffold(
+      body: Column(
+        children: [
+          TopBalance(
+            ethAddress: widget.ethAddress,
+          ),
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(
+                10.0,
+              ),
+            ),
+            child: TabBar(
+              controller: _tabController,
+              // indicator: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(
+              //     10.0,
+              //   ),
+              //   color: Colors.grey.shade900,
+              // ),
+              labelColor: kPrimaryColor,
+              indicatorColor: kPrimaryColor,
+              labelStyle: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
+              unselectedLabelColor: Colors.grey[500],
+              tabs: const [
+                Tab(
+                  text: 'Tokens',
+                ),
+                Tab(
+                  text: "NFT",
+                ),
+              ],
             ),
           ),
-          child: TabBar(
-            controller: _tabController,
-            // indicator: BoxDecoration(
-            //   borderRadius: BorderRadius.circular(
-            //     10.0,
-            //   ),
-            //   color: Colors.grey.shade900,
-            // ),
-            labelColor: kPrimaryColor,
-            indicatorColor: kPrimaryColor,
-            labelStyle: Theme.of(context)
-                .textTheme
-                .bodyText1!
-                .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
-            unselectedLabelColor: Colors.grey[500],
-            tabs: const [
-              Tab(
-                text: 'Tokens',
-              ),
-              Tab(
-                text: "NFT",
-              ),
-            ],
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children:  [
+                 TokenList(
+                 selectedCurrencyList: widget.currencyList,
+                  ),
+                 const NftScreen()
+                 ],
+            ),
           ),
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children:  [
-               TokenList(
-               selectedCurrencyList: widget.currencyList,
-                ),
-               const NftScreen()
-               ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

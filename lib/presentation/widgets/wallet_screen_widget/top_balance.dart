@@ -17,7 +17,7 @@ class TopBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: kScreenWidth(context),
-      height: kScreenHeight(context) / 3,
+      //height: kScreenHeight(context) / 2.7,
       color: kPrimaryColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -124,6 +124,7 @@ class TopBalance extends StatelessWidget {
                 )
               ],
             ),
+            const Gap(20),
           ],
         ),
       ),

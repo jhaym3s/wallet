@@ -6,7 +6,7 @@ import 'package:hodl/configs/configs.dart';
 
 import '../../../bloc/wallet_bloc.dart';
 import '../nav_bar_screens/persistent_bottom_nav_bar.dart';
-import 'intro_screen.dart';
+import 'on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

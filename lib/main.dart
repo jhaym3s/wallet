@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Hodl',
           theme: AppTheme().lightTheme,
-          darkTheme: AppTheme().darkTheme,
+          darkTheme: AppTheme().lightTheme,
           onGenerateRoute: AppRouter.onGenerated,
           home: const SplashScreen()),
     );

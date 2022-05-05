@@ -30,7 +30,8 @@ class _CreateWalletState extends State<CreateWallet> {
           return const Loading(actionText: "Creating wallet",);
         }
         if(state is CredentialFailureState){
-          return const  Center(child:Text("Failed"));
+          return const  Center(child:Text("Something is wrong. Please check network connection", 
+          softWrap: true,));
         }
         return const  Center(child:Text("Something went wrong"));
       },
