@@ -135,6 +135,7 @@ class AssetsImages {
   static const recieveWhite = "assets/images/recieve-white.png";
   static const sendWhite = "assets/images/send-white.png";
   static const purpleLogo = "assets/images/colored_icon.png";
+  static const restoreWallet = "assets/images/restore_Wallet.png";
 }
 
 /// Preference keys used to store/read values using [AppPreferences].

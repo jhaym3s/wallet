@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hodl/presentation/screens/nav_bar_screens/persistent_bottom_nav_bar.dart';
 import '../presentation/screens/authentication_screens/authentication_screens.dart';
+import '../presentation/screens/authentication_screens/on_boarding_screen.dart';
 import '../presentation/screens/index_token_screen.dart';
 import '../presentation/screens/nav_bar_screens/nav_bar_screens.dart';
 import '../presentation/screens/transactions/send.dart';
@@ -14,8 +15,8 @@ class AppRouter{
         return MaterialPageRoute(builder: (_)=> const ImportWallet());
         case CreateWallet.routeName:
         return  MaterialPageRoute(builder: (_)=> const CreateWallet());
-        case IntroScreen.routeName:
-        return  MaterialPageRoute(builder: (_)=> const IntroScreen());
+        case OnBoardingScreen.routeName:
+        return  MaterialPageRoute(builder: (_)=> const OnBoardingScreen());
         case WalletScreen.routeName:
         return  MaterialPageRoute(builder: (_)=> const WalletScreen());
         case CustomNavigationBar.routeName:
