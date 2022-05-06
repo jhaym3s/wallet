@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hodl/bloc/authentication_bloc.dart';
 import 'package:hodl/components/components.dart';
-import 'package:hodl/presentation/widgets/nft_screen.dart';
 import 'package:hodl/presentation/widgets/wallet_screen_widget/successful_walllet_screen.dart';
-import 'package:hodl/presentation/widgets/wallet_screen_widget/token_list.dart';
-import 'package:hodl/presentation/widgets/wallet_screen_widget/top_balance.dart';
 
 import '../../../bloc/wallet_bloc.dart';
 import '../../../configs/configs.dart';
 
 class WalletScreen extends StatefulWidget {
-  static const routeName = "/walletscreen";
+  static const routeName = "/walletScreen";
 
   const WalletScreen({Key? key}) : super(key: key);
   @override
@@ -19,14 +17,6 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +25,7 @@ class _WalletScreenState extends State<WalletScreen> {
       body: SafeArea(
         child: BlocBuilder<WalletBloc, WalletState>(
           builder: (context, state) {
-            if (state is DisplayMnemonicsState) {
+            if (state is WalletInitialState) {
               context.read<WalletBloc>().add(GetWallaetItem());
             }
             if (state is DisplayWalletItemState) {
@@ -53,7 +43,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(AssetsImages.logo),
+                    Image.asset(AssetsImages.purpleLogo),
                     const Gap(20),
                     Text(
                       "An error occured",

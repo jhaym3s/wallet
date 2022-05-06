@@ -30,7 +30,9 @@ class _ImportWalletState extends State<ImportWallet> {
           ),
           const Gap(30),
           CustomElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Navigator.of(context).pushNamed(ImportWallet.routeName);
+            },
             label: 'Import Key-Phrase',
           ),
           const Gap(10),
@@ -51,29 +53,4 @@ class _ImportWalletState extends State<ImportWallet> {
   }
 }
 
-class Indicator extends StatelessWidget {
-  final int positionIndex;
-  final int currentIndex;
-  const Indicator({
-    Key? key,
-    required this.positionIndex,
-    required this.currentIndex,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Container(
-        height: 12,
-        width: positionIndex == currentIndex ? 24 : 12,
-        decoration: BoxDecoration(
-          // border: Border.all(color: k),
-          color: positionIndex == currentIndex
-              ? kPrimaryColor
-              : Theme.of(context).splashColor,
-          borderRadius: BorderRadius.circular(100),
-        ),
-      ),
-    );
-  }
-}
+

@@ -11,41 +11,49 @@ import 'package:hodl/simple_bloc_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import 'bloc/authentication_bloc.dart';
 import 'bloc/wallet_bloc.dart';
 import 'data/coin_geko_client.dart';
 import 'data/coin_geko_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  var sharedPref = await SharedPreferences.getInstance();
   final CoinGekoRespository coinGekoRespository = CoinGekoRespository(
       coinGekoClient: CoinGekoClient(httpClient: http.Client()));
+      final configurationService = ConfigurationService(sharedPref);
   final addressService = AddressService(
-    ConfigurationService(await SharedPreferences.getInstance()),
+    configurationService
   );
   final coinGekoService = CoinGekoService(currencyService: 
-  CurrencyService(await SharedPreferences.getInstance()),
+  CurrencyService(sharedPref),
       coinGekoRespository: coinGekoRespository);
 
   BlocOverrides.runZoned(
       ()=> runApp(MyApp(
             addressService: addressService,
             coinGekoService: coinGekoService,
+            configurationService: configurationService,
           )),
       blocObserver: AppBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp(
-      {Key? key, required this.addressService, required this.coinGekoService})
+      {Key? key, required this.addressService, required this.coinGekoService, required this.configurationService})
       : super(key: key);
   final AddressService addressService;
-
+  final ConfigurationService configurationService;
   final CoinGekoService coinGekoService;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthBloc>(
+          create: (BuildContext context) => AuthBloc(
+              addressService: addressService, ),
+        ),
         BlocProvider<WalletBloc>(
           create: (BuildContext context) => WalletBloc(
               addressService: addressService, coinGekoService: coinGekoService),
@@ -57,7 +65,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme().lightTheme,
           darkTheme: AppTheme().darkTheme,
           onGenerateRoute: AppRouter.onGenerated,
-          home: const SplashScreen()),
+          home: SplashScreen(configurationService: configurationService,)),
     );
   }
 }

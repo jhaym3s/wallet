@@ -22,10 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
-      // widget.configurationService.didSetupWallet()
-      //     ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
-      //     : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
+      widget.configurationService.didSetupWallet()
+          ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
+          : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
+     
     });
     super.initState();
   }

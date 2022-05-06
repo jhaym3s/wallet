@@ -6,11 +6,11 @@ abstract class WalletEvent extends Equatable{
   List<Object?> get props => [];
 }
 
-class GenerateMnmonics extends WalletEvent{}
-
-class GetSavedMnemonics extends WalletEvent{}
-
-
+class InitialWalletEvent extends WalletEvent{
+  @override
+  List<Object?> get props => [];
+  
+}
 class GetWallaetItem extends WalletEvent{
    @override
   List<Object?> get props => [];
