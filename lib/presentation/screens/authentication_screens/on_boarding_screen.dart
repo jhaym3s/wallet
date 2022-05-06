@@ -5,6 +5,7 @@ import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:hodl/components/intro_elevated_button.dart';
 import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 
+import '../../../bloc/authentication_bloc.dart';
 import '../../../configs/constants.dart';
 import '../../widgets/onboarding_item.dart';
 
@@ -108,8 +109,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                     nextFunction();
                   }
                 : () {
-                    context.read<WalletBloc>().add(GenerateMnmonics());
-                    context.read<WalletBloc>().add(GetSavedMnemonics());
+                    context.read<AuthBloc>().add(CreateWalletEvent());
+                    
                     Navigator.of(context).pushNamed(CreateWallet.routeName);
                   },
             label: 'Create Wallet',
