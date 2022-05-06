@@ -16,37 +16,18 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
   CoinGekoService coinGekoService;
   //ContractService contractService;
   WalletBloc({required this.addressService, required this.coinGekoService,})
-      : super(CredentialInitial()) {
-    on<GenerateMnmonics>(generateMnemonics);
-    on<GetSavedMnemonics>(getPrefMnemonics);
+      : super(WalletInitialState()) {
+    on<InitialWalletEvent>(emitInitialState);
     on<GetWallaetItem>(displayWalletItems);
     on<GetCurrencies>(getCurrencies);
     on<SelectCurrency>(addToSelectedItem);
     on<FindCurrencyEvent>(findCurrencyWithId);
   }
 
-  FutureOr<void> generateMnemonics(
-      GenerateMnmonics event, Emitter<WalletState> emit) async {
-    try {
-      final mnemonic = addressService.generateMnemonic();
-      await addressService.setupFromMnemonic(mnemonic);
-    } catch (_) {
-      emit(CredentialFailureState());
-    }
+  FutureOr<void> emitInitialState(InitialWalletEvent event, Emitter<WalletState> emit) {
+    emit(WalletInitialState());
   }
-
-  FutureOr<void> getPrefMnemonics(
-      GetSavedMnemonics event, Emitter<WalletState> emit) {
-    emit(CredentialLoadingState());
-    try {
-      final prefMnemonics = addressService.getPrefMnemonics();
-      emit(DisplayMnemonicsState(
-        mnemonic: prefMnemonics!,
-      ));
-    } catch (_) {
-      emit(CredentialFailureState());
-    }
-  }
+  
 
   FutureOr<void> displayWalletItems(
       GetWallaetItem event, Emitter<WalletState> emit) async {
@@ -54,13 +35,9 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
     try {
       await coinGekoService.getCurrencies();
       final prefEthAddress = addressService.getprefEthAddress();
-      final selectedCurrency = coinGekoService.selectedCurrency;
       final allCurrency = coinGekoService.allCurrency;
-      print("done");
       emit(DisplayWalletItemState(
           walletAddress: prefEthAddress!,
-          selectedCurrency: selectedCurrency,
-        //  currencyTabbed: allCurrency.firstWhere((element) => element.id == "id"),
           allCurrencies: allCurrency));
     } catch (_) {
       emit(CredentialFailureState());
@@ -94,4 +71,6 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
       walletAddress: prefEthAddress!,
        ));
   }
+
+  
 }

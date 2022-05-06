@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:hodl/configs/configs.dart';
 import '../../components/copy_button.dart';
 import '../../components/intro_elevated_button.dart';
@@ -70,6 +72,7 @@ class CreateWalletSuccessScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: CustomElevatedButton(
                 onPressed: () {
+                  context.read<WalletBloc>().add(InitialWalletEvent());
                   Navigator.of(context).popAndPushNamed(
                     CustomNavigationBar.routeName,
                   );

@@ -5,11 +5,15 @@ import 'package:gap/gap.dart';
 import 'package:hodl/configs/configs.dart';
 
 import '../../../bloc/wallet_bloc.dart';
+import '../../../services/configuration_service.dart';
 import '../nav_bar_screens/persistent_bottom_nav_bar.dart';
+import '../nav_bar_screens/wallet_screen.dart';
 import 'on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key, required this.configurationService})
+      : super(key: key);
+  final ConfigurationService configurationService;
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -18,7 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
+      widget.configurationService.didSetupWallet()
+          ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
+          : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
       //  context.read<CredentialBloc>().add(GetCurrencies());
       //            context.read<CredentialBloc>().add(DisplayWalletItem());
       //         Navigator.of(context).popAndPushNamed(
@@ -38,7 +44,13 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(AssetsImages.logo),
-            Text(kAppName.toUpperCase(), style: Theme.of(context).textTheme.headline2!.copyWith(color: kWhite,fontWeight: FontWeight.bold),)
+            Text(
+              kAppName.toUpperCase(),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2!
+                  .copyWith(color: kWhite, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),

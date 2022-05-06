@@ -3,7 +3,7 @@ part of 'wallet_bloc.dart';
 @immutable
 abstract class WalletState extends Equatable {}
 
-class CredentialInitial extends WalletState {
+class WalletInitialState extends WalletState {
   @override
   List<Object?> get props => [];
 }
@@ -25,17 +25,15 @@ class DisplayMnemonicsState extends WalletState {
 class DisplayWalletItemState extends WalletState {
   final String  walletAddress;
   final List<CoinGeko> allCurrencies;
-  final List<CoinGeko> selectedCurrency;
   //final EtherAmount currencyBalance;
 
   DisplayWalletItemState({
     required this.walletAddress,
-    required this.selectedCurrency,
     required this.allCurrencies,
     //required this.currencyBalance,
   });
   @override
-  List<Object?> get props => [walletAddress, selectedCurrency, allCurrencies,];
+  List<Object?> get props => [walletAddress, allCurrencies,];
 }
 
 
