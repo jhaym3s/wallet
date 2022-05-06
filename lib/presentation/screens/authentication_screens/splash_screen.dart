@@ -25,11 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       widget.configurationService.didSetupWallet()
           ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
           : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
-      //  context.read<CredentialBloc>().add(GetCurrencies());
-      //            context.read<CredentialBloc>().add(DisplayWalletItem());
-      //         Navigator.of(context).popAndPushNamed(
-      //           CustomNavigationBar.routeName,
-      //         );
+     
     });
     super.initState();
   }
