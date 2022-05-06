@@ -9,14 +9,15 @@ import '../widgets/wallet_screen_widget/top_icons.dart';
 
 class IndexTokenScreen extends StatefulWidget {
   static const routeName = "index_token_screen";
-  const IndexTokenScreen({Key? key, }) : super(key: key);
+  const IndexTokenScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<IndexTokenScreen> createState() => _IndexTokenScreenState();
 }
 
 class _IndexTokenScreenState extends State<IndexTokenScreen> {
-
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments as String;
@@ -44,18 +45,23 @@ class _IndexTokenScreenState extends State<IndexTokenScreen> {
           ),
           body: BlocBuilder<WalletBloc, WalletState>(
             builder: (context, state) {
-              if(state is DisplayWalletItemState){
+              if (state is DisplayWalletItemState) {
                 context.read<WalletBloc>().add(FindCurrencyEvent(id: id));
               }
-              if(state is DisplaySpecificCurrency){
-                  return Column(
-                children: [
-                  IndexCurrencyHeader(currencyPrice: state.currency.currentPrice!,priceChangePercentage24H: state.currency.priceChangePercentage24H!,),
-                  Expanded(child: Container()),
-                ],
-              );
+              if (state is DisplaySpecificCurrency) {
+                return Column(
+                  children: [
+                    IndexCurrencyHeader(
+                      currency: state.currency,
+                    ),
+                    //TODO: Return List
+                    Expanded(child: Container()),
+                  ],
+                );
               }
-              return const Center(child: Text("Hi"),);
+              return const Center(
+                child: Text("An error occured"),
+              );
             },
           )),
     );

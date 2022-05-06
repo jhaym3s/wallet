@@ -3,7 +3,7 @@ part of 'wallet_bloc.dart';
 @immutable
 abstract class WalletState extends Equatable {}
 
-class CredentialInitial extends WalletState {
+class WalletInitialState extends WalletState {
   @override
   List<Object?> get props => [];
 }
@@ -14,7 +14,7 @@ class CredentialLoadingState extends WalletState {
 }
 
 class DisplayMnemonicsState extends WalletState {
-  final String? mnemonic;
+  final String mnemonic;
   DisplayMnemonicsState({
     required this.mnemonic,
   });
@@ -23,28 +23,28 @@ class DisplayMnemonicsState extends WalletState {
 }
 
 class DisplayWalletItemState extends WalletState {
-  final String? walletAddress;
+  final String  walletAddress;
   final List<CoinGeko> allCurrencies;
-  final List<CoinGeko> selectedCurrency;
-  final CoinGeko? currencyTabbed;
+  //final EtherAmount currencyBalance;
 
   DisplayWalletItemState({
     required this.walletAddress,
-    required this.selectedCurrency,
     required this.allCurrencies,
-    this.currencyTabbed,
+    //required this.currencyBalance,
   });
   @override
-  List<Object?> get props => [walletAddress, selectedCurrency, allCurrencies];
+  List<Object?> get props => [walletAddress, allCurrencies,];
 }
 
 
 class DisplaySpecificCurrency extends WalletState {
   final CoinGeko currency;
+  final String walletAddress;
+  //final EtherAmount balance;
 
-  DisplaySpecificCurrency({required this.currency});
+  DisplaySpecificCurrency({required this.currency, required this.walletAddress});
   @override
-  List<Object?> get props => [currency];
+  List<Object?> get props => [currency,walletAddress];
 }
 
 class CredentialFailureState extends WalletState {

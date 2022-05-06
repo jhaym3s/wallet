@@ -5,18 +5,19 @@ import 'package:hodl/bloc/wallet_bloc.dart';
 import 'package:hodl/components/intro_elevated_button.dart';
 import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 
+import '../../../bloc/authentication_bloc.dart';
 import '../../../configs/constants.dart';
 import '../../widgets/onboarding_item.dart';
 
-class IntroScreen extends StatefulWidget {
+class OnBoardingScreen extends StatefulWidget {
   static const routeName = "/import_screen";
-  const IntroScreen({Key? key}) : super(key: key);
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  State<IntroScreen> createState() => _IntroScreenState();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen>
+class _OnBoardingScreenState extends State<OnBoardingScreen>
     with TickerProviderStateMixin {
   late AnimationController _rippleAnimationController;
   late PageController _pageController;
@@ -102,14 +103,14 @@ class _IntroScreenState extends State<IntroScreen>
             ],
           ),
           const Gap(30),
-          IntroElevatedButton(
-            onPress: currentIndex != 2
+          CustomElevatedButton(
+            onPressed: currentIndex != 2
                 ? () {
                     nextFunction();
                   }
                 : () {
-                    context.read<WalletBloc>().add(GenerateMnmonics());
-                    context.read<WalletBloc>().add(GetSavedMnemonics());
+                    context.read<AuthBloc>().add(CreateWalletEvent());
+                    
                     Navigator.of(context).pushNamed(CreateWallet.routeName);
                   },
             label: 'Create Wallet',
@@ -120,15 +121,9 @@ class _IntroScreenState extends State<IntroScreen>
             height: 50,
             child: TextButton(
                 onPressed: currentIndex != 2
-                    ? () {
-                        nextFunction();
-                      }
-                    : () {
-                        // context
-                        //     .read<CredentialBloc>()
-                        //     .add(DisplayMnemonicsEvent());
-                        // Navigator.of(context).pushNamed(ImportWallet.routeName);
-                      },
+                    ? () => nextFunction()
+                    : () =>
+                        Navigator.of(context).pushNamed(ImportWallet.routeName),
                 child: const Text("Import Wallet"),
                 style: TextButton.styleFrom(primary: kTextColors)),
           ),

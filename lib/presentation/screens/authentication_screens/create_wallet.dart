@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hodl/presentation/widgets/create_wallet_success_screen.dart';
 
+import '../../../bloc/authentication_bloc.dart';
 import '../../../bloc/wallet_bloc.dart';
 import '../../../components/loading.dart';
 
@@ -21,15 +22,15 @@ class _CreateWalletState extends State<CreateWallet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WalletBloc, WalletState>(
+    return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if(state is DisplayMnemonicsState){
-          return CreateWalletSuccessScreen(mnmonics: state.mnemonic!);
+        if(state is DisplayKeyPhrases){
+          return CreateWalletSuccessScreen(mnmonics: state.keyPrase);
         }
-        if(state is CredentialLoadingState){
+        if(state is AuthLoadingState){
           return const Loading(actionText: "Creating wallet",);
         }
-        if(state is CredentialFailureState){
+        if(state is AuthFailureState){
           return const  Center(child:Text("Failed"));
         }
         return const  Center(child:Text("Something went wrong"));

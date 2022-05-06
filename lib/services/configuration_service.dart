@@ -16,6 +16,7 @@ class ConfigurationService implements IConfigurationService {
   const ConfigurationService(this._preferences);
 
   final SharedPreferences _preferences;
+  
 
   @override
   Future<void> setMnemonic(String? value) async {

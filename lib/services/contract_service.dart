@@ -12,7 +12,7 @@ abstract class IContractService {
   Future<String?> send(
       String privateKey, EthereumAddress receiver, BigInt amount,
       {TransferEvent? onTransfer, Function(Object exeception)? onError});
-  Future<BigInt> getTokenBalance(EthereumAddress from);
+  //Future<BigInt> getTokenBalance(EthereumAddress from);
   Future<EtherAmount> getEthBalance(EthereumAddress from);
   Future<void> dispose();
   StreamSubscription listenTransfer(TransferEvent onTransfer);
@@ -43,7 +43,7 @@ class ContractService implements IContractService {
     final networkId = await ethClient.getNetworkId();
 
     StreamSubscription? event;
-    // Workaround once sendTransacton doesn't return a Promise containing confirmation / receipt
+    // Workaround once sendTransacton doesn't return a Future containing confirmation / receipt
     if (onTransfer != null) {
       event = listenTransfer((from, to, value) async {
         onTransfer(from, to, value);
@@ -76,16 +76,16 @@ class ContractService implements IContractService {
     return ethClient.getBalance(from);
   }
 
-  @override
-  Future<BigInt> getTokenBalance(EthereumAddress from) async {
-    final response = await ethClient.call(
-      contract: contract,
-      function: _balanceFunction(),
-      params: [from],
-    );
+  // @override
+  // Future<BigInt> getTokenBalance(EthereumAddress from) async {
+  //   final response = await ethClient.call(
+  //     contract: contract,
+  //     function: _balanceFunction(),
+  //     params: [from],
+  //   );
 
-    return response.first as BigInt;
-  }
+  //   return response.first as BigInt;
+  // }
 
   @override
   StreamSubscription listenTransfer(TransferEvent onTransfer, {int? take}) {
