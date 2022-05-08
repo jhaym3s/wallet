@@ -110,7 +110,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                   }
                 : () {
                     context.read<AuthBloc>().add(CreateWalletEvent());
-                    
                     Navigator.of(context).pushNamed(CreateWallet.routeName);
                   },
             label: 'Create Wallet',
