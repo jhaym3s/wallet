@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../bloc/authentication_bloc.dart';
 import '../../../configs/configs.dart';
+import '../../screens/nav_bar_screens/persistent_bottom_nav_bar.dart';
 
 class ImportWalletWithX extends StatefulWidget {
   static const routeName = "/import_with_x";
-  const ImportWalletWithX({Key? key, required this.hintText,required this.isPrivateKeyScreen, this.errorMessage}) : super(key: key);
+  const ImportWalletWithX(
+      {Key? key,
+      required this.hintText,
+      required this.isPrivateKeyScreen,
+      this.errorMessage})
+      : super(key: key);
 
   final String hintText;
   final bool isPrivateKeyScreen;
-   final String? errorMessage;
+  final String? errorMessage;
 
   @override
   State<ImportWalletWithX> createState() => _ImportWalletWithXState();
@@ -25,7 +33,13 @@ class _ImportWalletWithXState extends State<ImportWalletWithX> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: kTransparent,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: SafeArea(
           child: Form(
@@ -36,51 +50,54 @@ class _ImportWalletWithXState extends State<ImportWalletWithX> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Gap(10),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(border: Border.all(width: 1)),
-                child: Row(
+              const Card(),
+              Card(
+                elevation: 5,
+                shadowColor: kPrimaryColor,
+                //shape: BoxDecoration(border: Border.all(width: 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Flexible(
-                      child: TextFormField(
-                        controller: textEditingController,
-                        keyboardType: TextInputType.multiline,
-                        showCursor: false,
-                        //cursorHeight: 40,
-                        // The validator receives the text that the user has entered.
-                        // maxLength: 300000,
-                        decoration:  InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter ${widget.hintText}',
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter ${widget.hintText}';
-                          }
-                          if(!value.startsWith("0x")|| value.length == 64){
-                              return widget.isPrivateKeyScreen?"${widget.errorMessage}": null;
-                          }
-                          return null;
-                        },
-                      
+                    TextFormField(
+                      controller: textEditingController,
+                      keyboardType: TextInputType.multiline,
+                      showCursor: true,
+                      cursorColor: kPrimaryColor,
+                      cursorHeight: 20,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter ${widget.hintText}',
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter ${widget.hintText}';
+                        }
+                        if (!value.startsWith("0x") || value.length == 64) {
+                          return widget.isPrivateKeyScreen
+                              ? "${widget.errorMessage}"
+                              : null;
+                        }
+                        if (value.split(" ").length != 12) {
+                          return widget.isPrivateKeyScreen
+                              ? null
+                              : "Seed phrase must be 12 words";
+                        }
+                        return null;
+                      },
                     ),
+                    const Gap(70),
                     TextButton(
                       child: Text(
                         "Paste",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontWeight: FontWeight.bold, color: kPrimaryColor),
                       ),
                       onPressed: () async {
-                        Clipboard.getData(Clipboard.kTextPlain).then((value){ 
-                            textEditingController.text = textEditingController.text + value!.text!;
+                        Clipboard.getData(Clipboard.kTextPlain).then((value) {
+                          textEditingController.text =
+                              textEditingController.text + value!.text!;
                         });
-                      }, 
+                      },
                     ),
                   ],
                 ),
@@ -91,12 +108,14 @@ class _ImportWalletWithXState extends State<ImportWalletWithX> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: kPrimaryColor),
                   onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                      widget.isPrivateKeyScreen
+                          ? context.read<AuthBloc>().add(ImportWithKeyPhrase(
+                              keyPhrase: textEditingController.text))
+                          : context.read<AuthBloc>().add(ImportWithKeyPhrase(
+                              keyPhrase: textEditingController.text));
+                      Navigator.of(context).popAndPushNamed(
+                        CustomNavigationBar.routeName,
                       );
                     }
                   },

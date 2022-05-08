@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hodl/presentation/screens/authentication_screens/authentication_screens.dart';
 
 import '../../../components/intro_elevated_button.dart';
 import '../../../configs/constants.dart';
@@ -43,9 +44,9 @@ class _ImportWalletState extends State<ImportWallet> {
           const Gap(30),
           CustomElevatedButton(
             onPressed: () {
-              // Navigator.of(context).pushNamed(ImportWallet.routeName);
+              Navigator.of(context).pushNamed(ImportWithMnemonics.routeName);
             },
-            label: 'Import Key-Phrase',
+            label: 'Import with seed Phrase',
           ),
           const Gap(10),
           SizedBox(
@@ -53,7 +54,7 @@ class _ImportWalletState extends State<ImportWallet> {
             height: 50,
             child: TextButton(
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(ImportWallet.routeName);
+                  Navigator.of(context).pushNamed(ImportWithPrivateKey.routeName);
                 },
                 child: const Text("Import with private key"),
                 style: TextButton.styleFrom(primary: kTextColors)),

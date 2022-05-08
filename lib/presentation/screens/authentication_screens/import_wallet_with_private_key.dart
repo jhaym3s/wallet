@@ -8,7 +8,7 @@ class ImportWithPrivateKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ImportWalletWithX(
-      hintText: "your private key",
+      hintText: " your private key",
       isPrivateKeyScreen: true,
       errorMessage: "Invalid Private Key",
     );
