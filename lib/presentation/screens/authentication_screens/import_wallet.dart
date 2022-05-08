@@ -17,6 +17,18 @@ class _ImportWalletState extends State<ImportWallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: kPrimaryColor,
+          ),
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: SafeArea(
           child: SizedBox(
         child: Column(children: [
@@ -52,5 +64,3 @@ class _ImportWalletState extends State<ImportWallet> {
     );
   }
 }
-
-

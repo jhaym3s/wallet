@@ -110,7 +110,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                   }
                 : () {
                     context.read<AuthBloc>().add(CreateWalletEvent());
-                    
                     Navigator.of(context).pushNamed(CreateWallet.routeName);
                   },
             label: 'Create Wallet',
@@ -120,9 +119,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
             width: kScreenWidth(context),
             height: 50,
             child: TextButton(
-                onPressed: currentIndex != 2
-                    ? () => nextFunction()
-                    : () =>
+                onPressed:
+                   
+                   () =>
                         Navigator.of(context).pushNamed(ImportWallet.routeName),
                 child: const Text("Import Wallet"),
                 style: TextButton.styleFrom(primary: kTextColors)),

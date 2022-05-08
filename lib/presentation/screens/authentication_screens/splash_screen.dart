@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:gap/gap.dart';
 import 'package:hodl/configs/configs.dart';
 
-import '../../../bloc/wallet_bloc.dart';
 import '../../../services/configuration_service.dart';
-import '../nav_bar_screens/persistent_bottom_nav_bar.dart';
-import '../nav_bar_screens/wallet_screen.dart';
 import 'on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,14 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5)).then((value) {
-      widget.configurationService.didSetupWallet()
-          ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
-          : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
-      //  context.read<CredentialBloc>().add(GetCurrencies());
-      //            context.read<CredentialBloc>().add(DisplayWalletItem());
-      //         Navigator.of(context).popAndPushNamed(
-      //           CustomNavigationBar.routeName,
-      //         );
+      // widget.configurationService.didSetupWallet()
+      //     ? Navigator.pushReplacementNamed(context, WalletScreen.routeName)
+      //     : Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
+       Navigator.pushReplacementNamed(context, OnBoardingScreen.routeName);
+     
     });
     super.initState();
   }
